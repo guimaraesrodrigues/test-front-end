@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 import { HomeComponent } from './home.component';
-import { ReactiveFormsModule } from '@angular/forms';
+
 
 export const routes: Routes = [
   {
@@ -21,11 +24,10 @@ export const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
   ]
 })
 export class HomeModule { }

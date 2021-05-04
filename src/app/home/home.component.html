@@ -1,1 +1,19 @@
-<p>home works!</p>
+<div class="home">
+    <div class="home__content">
+        <h1 class="home__content__header">Chuck Norris Jokes</h1>
+        <div class="home__content__body">
+            <mat-form-field appearance="fill">
+                <mat-label>Search</mat-label>
+                <input matInput 
+                    type="text" 
+                    placeholder="Ex: snakes">
+            </mat-form-field>
+            <button mat-button 
+                    class="home__content__body__btn"
+                    color="primary"
+                    (click)="searchJokes()">
+                Go!
+            </button>
+        </div>
+    </div>
+</div>
