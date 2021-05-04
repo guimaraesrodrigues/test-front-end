@@ -8,17 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HomeComponent } from './home.component';
-
-
-export const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  },
-  {
-    path: '**', redirectTo: '', pathMatch: 'full'
-  }
-];
+import { HomeRoutingModule } from './home-routing.module';
+import { ResultsModule } from '../results/results.module';
 
 @NgModule({
   declarations: [
@@ -26,12 +17,13 @@ export const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    HomeRoutingModule,
+    ResultsModule,
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSnackBarModule,
-    FormsModule,
-    RouterModule.forChild(routes)
+    MatSnackBarModule
   ]
 })
 export class HomeModule { }

@@ -1,15 +1,22 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/home/home.module').then(mod => mod.HomeModule)
+    loadChildren: () => import('./modules/home/home.module').then(mod => mod.HomeModule),
+  },
+  {
+    path: '**', redirectTo: '', pathMatch: 'full'
   }
 ];
 @NgModule({
+  declarations: [],
   imports: [
+    CommonModule,
     RouterModule.forRoot(routes)
+
   ],
   exports: [
     RouterModule
