@@ -1,0 +1,11 @@
+<div>
+    <div>
+        {{factsList?.length}} facts found
+    </div>
+
+    <div *ngFor="let fact of factsList">
+        <mat-card>
+            {{ fact.value }}
+        </mat-card>
+    </div>
+</div>

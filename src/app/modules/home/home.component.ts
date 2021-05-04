@@ -3,9 +3,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FactQueryResult } from '../models/fact.model';
+import { FactQueryResult } from '../../shared/models/fact.model';
 
-import { FactsService } from '../services/facts.service';
+import { FactsService } from '../../shared/services/facts.service';
 
 @Component({
   selector: 'app-home',
@@ -34,21 +34,23 @@ export class HomeComponent implements OnDestroy {
    * @memberof HomeComponent
    */
   public searchJokes(): void {
-    this.factsService.getFactsWithQuery(this.searchQuery)
-        .pipe(takeUntil(this.subscriptionDestroyer))
-        .subscribe(
-          (data: FactQueryResult) => {
+    // this.router.navigate(['results']);
+    // this.router.navigateByUrl('results');
+    // this.factsService.getFactsWithQuery(this.searchQuery)
+    //     .pipe(takeUntil(this.subscriptionDestroyer))
+    //     .subscribe(
+    //       (data: FactQueryResult) => {
 
-            this.navigateToResults(data);
-          },
-          (err) => {
-            this._snackBar.open(`Error: ${err.error.message}`, 'Close', {
-              horizontalPosition: 'right',
-              verticalPosition: 'top',
-              duration: 5000
-            });
-          }
-        )
+    //         this.navigateToResults(data);
+    //       },
+    //       (err) => {
+    //         this._snackBar.open(`Error: ${err.error.message}`, 'Close', {
+    //           horizontalPosition: 'right',
+    //           verticalPosition: 'top',
+    //           duration: 5000
+    //         });
+    //       }
+    //     )
   }
 
   private navigateToResults(result: FactQueryResult): void {

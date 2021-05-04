@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { FactModel, FactQueryResult } from '../models/fact.model';
-import { APIUrls } from '../shared/constants';
+import { APIUrls } from '../constants';
 
 @Injectable({
   providedIn: 'root'

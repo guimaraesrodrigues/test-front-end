@@ -28,6 +28,7 @@ export class FactModel implements FactInterface {
         this.categories = categories;
     }
 }
+
 export interface FactQueryResult {
     total?: number, 
     result?: FactModel[]
