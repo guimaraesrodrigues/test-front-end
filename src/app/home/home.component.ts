@@ -1,6 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { FactQueryResult } from '../models/fact.model';
 
 import { FactsService } from '../services/facts.service';
 
@@ -11,11 +14,13 @@ import { FactsService } from '../services/facts.service';
 })
 export class HomeComponent implements OnDestroy {
 
-  public searchQuery: string = 'snake';
+  public searchQuery: string = '';
   private subscriptionDestroyer: Subject<any> = new Subject();
 
   constructor(
-    private factsService: FactsService
+    private factsService: FactsService,
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) { }
 
   public ngOnDestroy(): void {
@@ -32,13 +37,21 @@ export class HomeComponent implements OnDestroy {
     this.factsService.getFactsWithQuery(this.searchQuery)
         .pipe(takeUntil(this.subscriptionDestroyer))
         .subscribe(
-          (data) => {
-            console.log('total  ', data.total)
-            console.log('result  ', data.result)
+          (data: FactQueryResult) => {
+
+            this.navigateToResults(data);
           },
           (err) => {
-            console.log('erro ', err.error.message)
+            this._snackBar.open(`Error: ${err.error.message}`, 'Close', {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              duration: 5000
+            });
           }
         )
+  }
+
+  private navigateToResults(result: FactQueryResult): void {
+    this.router.navigate(['results'], {state: result});
   }
 }

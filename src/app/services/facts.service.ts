@@ -2,13 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import { FactModel } from '../models/fact.model';
+import { FactModel, FactQueryResult } from '../models/fact.model';
 import { APIUrls } from '../shared/constants';
-
-export interface FactQueryResult {
-  total?: number, 
-  result?: FactModel[]
-}
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +14,19 @@ export class FactsService {
     private http: HttpClient,
   ) { }
 
+  /**
+   * Retrieve facts with the given query
+   *
+   * @param {string} query
+   * @returns {Observable<FactQueryResult>}
+   * @memberof FactsService
+   */
   public getFactsWithQuery(query: string): Observable<FactQueryResult>{
     return this.http.get(APIUrls.FACTS.GET_WITH_QUERY(query));
   }
 
   /**
-   *
+   * Get a random fact from API
    *
    * @returns {Observable<FactModel>}
    * @memberof FactsService
