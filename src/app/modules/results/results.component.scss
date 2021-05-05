@@ -3,12 +3,16 @@
     height: 100vh;
     overflow: auto;
 
-
     &__header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
         &__logo {
             max-width: 50vw;
             height: auto;
-            padding-top: 25vh;
+            padding-top: 4vh;
+            padding-bottom: 4vh;
         }
     }
 }

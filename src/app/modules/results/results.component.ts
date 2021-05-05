@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -11,7 +11,7 @@ import { JokeService } from 'src/app/shared/services/jokes.service';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent implements OnInit, OnDestroy {
 
   public jokesList: Joke[];
   public searchQuery: string;
@@ -28,9 +28,23 @@ export class ResultsComponent implements OnInit {
     this.checkIfRouterHasData();
   }
 
+  /**
+   * 
+   *
+   * @memberof ResultsComponent
+   */
   public ngOnInit(): void {
     this.verifyQueryAndGetJokes();
-    this.listenToRouteParamChange();
+  }
+
+  /**
+   * Unsubscribe from all Obaervers on component destroy
+   *
+   * @memberof ResultsComponent
+   */
+   public ngOnDestroy(): void {
+    this.subscriptionDestroyer.next();
+    this.subscriptionDestroyer.complete();
   }
 
   /**
@@ -46,23 +60,7 @@ export class ResultsComponent implements OnInit {
   }
 
   /**
-   * Listen to route changes and request data
-   *
-   * @private
-   * @memberof ResultsComponent
-   */
-  private listenToRouteParamChange(): void {
-    this.router.events
-      .pipe(takeUntil(this.subscriptionDestroyer))
-      .subscribe((val) => {
-        if (val instanceof NavigationEnd) {
-          this.verifyQueryAndGetJokes();
-        }
-      });
-  }
-
-  /**
-   * Verify if orderId exists and get then get chat
+   * Verify if url has search query and jokesList not initialized
    *
    * @private
    * @memberof ResultsComponent

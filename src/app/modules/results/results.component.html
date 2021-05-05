@@ -3,8 +3,9 @@
         <img src="assets/logo.png"
              class="results__header__logo">
     </div>
-    <div>
-        {{jokesList?.length}} facts found
+    <div *ngIf="!showLoading"
+        class="mat-h1 mat-headline">
+        {{jokesList?.length}} jokes found!
     </div>
 
     <div *ngFor="let joke of jokesList">
@@ -22,7 +23,7 @@
             </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            {{ joke.value }}
+            <span class="mat-body mat-body-1"> {{ joke.value }} </span>
           </mat-card-content>
         </mat-card>
     </div>

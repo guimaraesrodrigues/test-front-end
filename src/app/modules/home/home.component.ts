@@ -24,6 +24,11 @@ export class HomeComponent implements OnDestroy {
     private _snackBar: MatSnackBar
   ) { }
 
+  /**
+   * Unsubscribe from all Obaervers on component destroy
+   *
+   * @memberof HomeComponent
+   */
   public ngOnDestroy(): void {
     this.subscriptionDestroyer.next();
     this.subscriptionDestroyer.complete();
@@ -52,7 +57,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   /**
-   * Change to results page
+   * Change to results page and send data to ResultsComponent
    *
    * @private
    * @param {FactQueryResult} result
