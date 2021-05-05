@@ -1,11 +1,11 @@
 <div>
     <div>
-        {{factsList?.length}} facts found
+        {{jokesList?.length}} facts found
     </div>
 
-    <div *ngFor="let fact of factsList">
+    <div *ngFor="let joke of jokesList">
         <mat-card>
-            {{ fact.value }}
+            {{ joke.value }}
         </mat-card>
     </div>
 </div>

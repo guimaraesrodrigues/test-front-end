@@ -2,36 +2,36 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-import { FactModel, FactQueryResult } from '../models/fact.model';
+import { Joke, JokeQueryResult } from '../models/joke.model';
 import { APIUrls } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FactsService {
+export class JokeService {
 
   constructor(
     private http: HttpClient,
   ) { }
 
   /**
-   * Retrieve facts with the given query
+   * Retrieve jokes with the given query
    *
    * @param {string} query
    * @returns {Observable<FactQueryResult>}
-   * @memberof FactsService
+   * @memberof JokesService
    */
-  public getFactsWithQuery(query: string): Observable<FactQueryResult>{
+  public getFactsWithQuery(query: string): Observable<JokeQueryResult>{
     return this.http.get(APIUrls.FACTS.GET_WITH_QUERY(query));
   }
 
   /**
-   * Get a random fact from API
+   * Get a random joke from API
    *
    * @returns {Observable<FactModel>}
-   * @memberof FactsService
+   * @memberof JokesService
    */
-  public getRandomFact(): Observable<FactModel> {
+  public getRandomFact(): Observable<Joke> {
     return this.http.get(APIUrls.FACTS.GET_RANDOM)
   }
 }

@@ -10,16 +10,29 @@
                 <input matInput 
                     type="text" 
                     placeholder="Ex: snakes"
+                    (keydown.enter)="searchJokes()"
                     [(ngModel)]="searchQuery">
             </mat-form-field>
-            <button mat-button 
-                    class="home__content__body__btn"
-                    color="primary"
-                    routerLink="/results"
-                    (click)="searchJokes()">
-                Go!
-            </button>
+            <div class="home__content__body__btn">
+                <button mat-button 
+                        color="primary"
+                        (click)="searchJokes()">
+                    Norris Search
+                </button>
+                <button mat-button 
+                        color="primary"
+                        (click)="searchJokes()">
+                    I'm Feeling Lucky
+                </button>
+            </div>
         </div>
+    </div>
+</div>
+
+<div *ngIf="showLoading"
+     class="overlay">
+    <div class="center">
+        <mat-spinner></mat-spinner>
     </div>
 </div>
 

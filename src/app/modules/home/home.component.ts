@@ -3,9 +3,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FactQueryResult } from '../../shared/models/fact.model';
 
-import { FactsService } from '../../shared/services/facts.service';
+import { JokeQueryResult } from '../../shared/models/joke.model';
+import { JokeService } from '../../shared/services/jokes.service';
 
 @Component({
   selector: 'app-home',
@@ -15,10 +15,11 @@ import { FactsService } from '../../shared/services/facts.service';
 export class HomeComponent implements OnDestroy {
 
   public searchQuery: string = '';
+  public showLoading: boolean = false;
   private subscriptionDestroyer: Subject<any> = new Subject();
 
   constructor(
-    private factsService: FactsService,
+    private factsService: JokeService,
     private router: Router,
     private _snackBar: MatSnackBar
   ) { }
@@ -29,31 +30,50 @@ export class HomeComponent implements OnDestroy {
   }
 
   /**
-   *
+   * Get jokes with the given query
    *
    * @memberof HomeComponent
    */
   public searchJokes(): void {
-    // this.router.navigate(['results']);
-    // this.router.navigateByUrl('results');
-    // this.factsService.getFactsWithQuery(this.searchQuery)
-    //     .pipe(takeUntil(this.subscriptionDestroyer))
-    //     .subscribe(
-    //       (data: FactQueryResult) => {
-
-    //         this.navigateToResults(data);
-    //       },
-    //       (err) => {
-    //         this._snackBar.open(`Error: ${err.error.message}`, 'Close', {
-    //           horizontalPosition: 'right',
-    //           verticalPosition: 'top',
-    //           duration: 5000
-    //         });
-    //       }
-    //     )
+    this.showLoading = true;
+    this.factsService.getFactsWithQuery(this.searchQuery)
+        .pipe(takeUntil(this.subscriptionDestroyer))
+        .subscribe(
+          (data: JokeQueryResult) => {
+            this.showLoading = false;
+            this.navigateToResults(data);
+          },
+          (err) => {
+            this.displayRequestError(err);
+            this.showLoading = false;
+  
+          }
+        )
   }
 
-  private navigateToResults(result: FactQueryResult): void {
-    this.router.navigate(['results'], {state: result});
+  /**
+   * Change to results page
+   *
+   * @private
+   * @param {FactQueryResult} result
+   * @memberof HomeComponent
+   */
+  private navigateToResults(result: JokeQueryResult): void {
+    this.router.navigate([`/results`, { query: this.searchQuery}], { state: {data: result}});
+  }
+
+  /**
+   * Show snackbar with the given error
+   *
+   * @private
+   * @param {*} err
+   * @memberof HomeComponent
+   */
+  private displayRequestError(err: any): void {
+    this._snackBar.open(`Error: ${err.error.message}`, 'Close', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      duration: 5000
+    });
   }
 }

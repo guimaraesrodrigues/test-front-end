@@ -1,5 +1,5 @@
 
-interface FactInterface {
+interface JokeInterface {
     id?: string;
     url?: string;
     value?: string;
@@ -7,7 +7,7 @@ interface FactInterface {
     categories?: string[];
 }
 
-export class FactModel implements FactInterface {
+export class Joke implements JokeInterface {
     public id?: string;
     public url?: string;
     public value?: string;
@@ -20,7 +20,7 @@ export class FactModel implements FactInterface {
         value,
         icon_url,
         categories
-    }: FactInterface) {
+    }: JokeInterface) {
         this.id = id;
         this.url = url;
         this.value = value;
@@ -29,7 +29,7 @@ export class FactModel implements FactInterface {
     }
 }
 
-export interface FactQueryResult {
+export interface JokeQueryResult {
     total?: number, 
-    result?: FactModel[]
+    result?: Joke[]
   }
