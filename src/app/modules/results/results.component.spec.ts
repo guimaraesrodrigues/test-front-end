@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ResultsComponent } from './results.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('ResultsComponent', () => {
   let component: ResultsComponent;
@@ -16,7 +17,8 @@ describe('ResultsComponent', () => {
         HttpClientTestingModule,
         MatSnackBarModule
       ],
-      declarations: [ ResultsComponent ]
+      declarations: [ ResultsComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   });

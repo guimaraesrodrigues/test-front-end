@@ -1,5 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -14,9 +16,11 @@ describe('HomeComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        FormsModule
       ],
-      declarations: [ HomeComponent ]
+      declarations: [ HomeComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   });
