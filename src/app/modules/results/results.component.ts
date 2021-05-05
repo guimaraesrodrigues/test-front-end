@@ -82,7 +82,7 @@ export class ResultsComponent implements OnInit {
    */
   private searchJokes(): void {
     this.showLoading = true;
-    this.jokeService.getFactsWithQuery(this.searchQuery)
+    this.jokeService.getJokesWithQuery(this.searchQuery)
       .pipe(takeUntil(this.subscriptionDestroyer))
       .subscribe(
         (data: JokeQueryResult) => {

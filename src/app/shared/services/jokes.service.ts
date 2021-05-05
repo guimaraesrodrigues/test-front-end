@@ -21,17 +21,7 @@ export class JokeService {
    * @returns {Observable<FactQueryResult>}
    * @memberof JokesService
    */
-  public getFactsWithQuery(query: string): Observable<JokeQueryResult>{
-    return this.http.get(APIUrls.FACTS.GET_WITH_QUERY(query));
-  }
-
-  /**
-   * Get a random joke from API
-   *
-   * @returns {Observable<FactModel>}
-   * @memberof JokesService
-   */
-  public getRandomFact(): Observable<Joke> {
-    return this.http.get(APIUrls.FACTS.GET_RANDOM)
+  public getJokesWithQuery(query: string): Observable<JokeQueryResult>{
+    return this.http.get(APIUrls.JOKES.GET_WITH_QUERY(query));
   }
 }

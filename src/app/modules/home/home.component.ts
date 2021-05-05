@@ -36,7 +36,7 @@ export class HomeComponent implements OnDestroy {
    */
   public searchJokes(): void {
     this.showLoading = true;
-    this.factsService.getFactsWithQuery(this.searchQuery)
+    this.factsService.getJokesWithQuery(this.searchQuery)
         .pipe(takeUntil(this.subscriptionDestroyer))
         .subscribe(
           (data: JokeQueryResult) => {
