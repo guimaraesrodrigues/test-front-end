@@ -1,6 +1,7 @@
 <div class="results">
     <div class="results__header">
-        <img src="assets/logo.png">
+        <img src="assets/logo.png"
+             class="results__header__logo">
     </div>
     <div>
         {{jokesList?.length}} facts found
@@ -8,11 +9,24 @@
 
     <div *ngFor="let joke of jokesList">
         <mat-card>
+        <mat-card-header>
+            <img mat-card-avatar 
+                 src="{{joke.icon_url}}">
+            <mat-card-subtitle>
+                <span *ngIf="joke?.categories?.length > 0"> 
+                    Categories: {{joke?.categories?.join(", ")}} 
+                </span>
+                <span *ngIf="joke?.categories?.length == 0"> 
+                    No category 
+                </span>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
             {{ joke.value }}
+          </mat-card-content>
         </mat-card>
     </div>
 </div>
 
 <app-generic-loading *ngIf="showLoading">
-    
 </app-generic-loading>

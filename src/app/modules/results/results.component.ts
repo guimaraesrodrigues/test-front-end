@@ -29,6 +29,7 @@ export class ResultsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.verifyQueryAndGetJokes();
     this.listenToRouteParamChange();
   }
 
@@ -55,7 +56,7 @@ export class ResultsComponent implements OnInit {
       .pipe(takeUntil(this.subscriptionDestroyer))
       .subscribe((val) => {
         if (val instanceof NavigationEnd) {
-          this.verifyOrderIdAndGetCart();
+          this.verifyQueryAndGetJokes();
         }
       });
   }
@@ -66,10 +67,10 @@ export class ResultsComponent implements OnInit {
    * @private
    * @memberof ResultsComponent
    */
-  private verifyOrderIdAndGetCart(): void {
-    this.searchQuery = this.activatedRoute.snapshot.parent.params.orderId;
+  private verifyQueryAndGetJokes(): void {
+    this.searchQuery = this.activatedRoute.snapshot.params.query;
 
-    if (this.searchQuery) {
+    if (this.searchQuery && !this.jokesList) {
       this.searchJokes();
     }
   }
@@ -86,7 +87,7 @@ export class ResultsComponent implements OnInit {
       .subscribe(
         (data: JokeQueryResult) => {
           this.showLoading = false;
-          console.log('data ', data)
+          this.jokesList = data.result;
         },
         (err) => {
           this.displayRequestError(err);
