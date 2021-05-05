@@ -18,8 +18,7 @@ describe('HomeComponent', () => {
     total: 2, 
     result: [{id: 'abc', value: 'blabla'}]
   };
-
-  const errorMock = {error: 'error'}
+  const errorMock = {error: 'error'};
 
   beforeEach(async () => {
     jokeServiceStub = jasmine.createSpyObj('JokeService', [
@@ -59,7 +58,7 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call #navigateToResults when get facts returns with data', () => {
+  it('should call #navigateToResults when get jokes returns with data', () => {
     const spyOnNavigateToResults = spyOn(component as any, 'navigateToResults');
     
     jokeServiceStub.getJokesWithQuery.and.returnValue(of(queryMock));
@@ -68,7 +67,7 @@ describe('HomeComponent', () => {
     expect(spyOnNavigateToResults).toHaveBeenCalledWith(queryMock);
   });
 
-  it('should call #displayRequestError when get facts returns with error', () => {
+  it('should call #displayRequestError when get jokes returns with error', () => {
     const spyOnDisplayRequestError = spyOn(component as any, 'displayRequestError');
     
     jokeServiceStub.getJokesWithQuery.and.returnValue(throwError(errorMock));
