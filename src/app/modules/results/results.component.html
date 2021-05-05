@@ -1,4 +1,7 @@
-<div>
+<div class="results">
+    <div class="results__header">
+        <img src="assets/logo.png">
+    </div>
     <div>
         {{jokesList?.length}} facts found
     </div>
@@ -9,3 +12,7 @@
         </mat-card>
     </div>
 </div>
+
+<app-generic-loading *ngIf="showLoading">
+    
+</app-generic-loading>

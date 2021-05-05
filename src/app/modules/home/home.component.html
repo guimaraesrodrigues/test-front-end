@@ -29,11 +29,9 @@
     </div>
 </div>
 
-<div *ngIf="showLoading"
-     class="overlay">
-    <div class="center">
-        <mat-spinner></mat-spinner>
-    </div>
-</div>
+<app-generic-loading *ngIf="showLoading">
+    
+</app-generic-loading>
+
 
 <router-outlet></router-outlet>

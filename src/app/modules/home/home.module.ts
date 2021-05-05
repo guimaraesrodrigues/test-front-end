@@ -5,10 +5,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { ResultsModule } from '../results/results.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { ResultsModule } from '../results/results.module';
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    SharedModule
   ]
 })
 export class HomeModule { }
