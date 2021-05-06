@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ResultsComponent } from './results.component';
 import { JokeService } from 'src/app/shared/services/jokes.service';
@@ -43,7 +44,8 @@ describe('ResultsComponent', () => {
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatDialogModule
       ],
       providers: [
         {
