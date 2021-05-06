@@ -23,10 +23,20 @@
             </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <span class="mat-body mat-body-1"> {{ joke.value }} </span>
+            <div class="mat-body mat-body-1"
+                 [innerHTML]="highlight(joke.value)">
+            </div>
           </mat-card-content>
         </mat-card>
     </div>
+
+    <button class="results__back-btn"  
+            mat-fab 
+            matTooltip="Go back to home page"
+            color="primary"
+            (click)="goBackToHome()">
+        <mat-icon>chevron_left</mat-icon>
+    </button>
 </div>
 
 <app-generic-loading *ngIf="showLoading">

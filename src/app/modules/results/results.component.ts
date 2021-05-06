@@ -1,10 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Joke, JokeQueryResult } from 'src/app/shared/models/joke.model';
+
 import { JokeService } from 'src/app/shared/services/jokes.service';
+import { JokeDialogComponent } from './joke-dialog/joke-dialog.component';
 
 @Component({
   selector: 'app-results',
@@ -23,13 +26,14 @@ export class ResultsComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private jokeService: JokeService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     this.checkIfRouterHasData();
   }
 
   /**
-   * 
+   * Check if needs to get jokes from api when component initialize
    *
    * @memberof ResultsComponent
    */
@@ -48,6 +52,44 @@ export class ResultsComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Navigate to home page
+   *
+   * @memberof ResultsComponent
+   */
+  public goBackToHome(): void {
+    this.router.navigate(['']);
+  }
+
+  /**
+   * Create span element with text highlighted
+   *
+   * @param {string} value
+   * @returns {string}
+   * @memberof ResultsComponent
+   */
+  public highlight(value: string): string {
+    if(!this.searchQuery) {
+        return value;
+    }
+    return value.replace(new RegExp(this.searchQuery, "gi"), match => {
+        return ' <span class="highlightText">' + match + '</span> ';
+    });
+  }
+
+  /**
+   *
+   *
+   * @memberof ResultsComponent
+   */
+  private openJokeDialog(): void {
+    const randomJoke =  this.jokesList[Math.floor(Math.random()*this.jokesList.length)];
+    this.dialog.open(JokeDialogComponent, {
+      width: '400px',
+      data: {joke: randomJoke}
+    });
+  }
+
+  /**
    * Check if router has data and init jokesList
    *
    * @private
@@ -56,6 +98,10 @@ export class ResultsComponent implements OnInit, OnDestroy {
   private checkIfRouterHasData(): void {
     if (this.router.getCurrentNavigation()?.extras.state) {
       this.jokesList = this.router.getCurrentNavigation()?.extras.state?.data.result;
+      
+      if(this.router.getCurrentNavigation()?.extras.state?.feelingLucky) {
+        this.openJokeDialog();
+      }
     }
   }
 

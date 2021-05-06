@@ -15,4 +15,12 @@
             padding-bottom: 4vh;
         }
     }
+
+    &__back-btn {
+        top: auto;
+        right: 20px;
+        bottom: 20px;
+        left: auto;
+        position: fixed;
+    }
 }

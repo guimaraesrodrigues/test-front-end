@@ -16,6 +16,7 @@ export class HomeComponent implements OnDestroy {
 
   public searchQuery: string = '';
   public showLoading: boolean = false;
+  public luckyClicked: boolean = false;
   private subscriptionDestroyer: Subject<any> = new Subject();
 
   constructor(
@@ -57,6 +58,16 @@ export class HomeComponent implements OnDestroy {
   }
 
   /**
+   * Unsubscribe from all Obaervers on component destroy
+   *
+   * @memberof HomeComponent
+   */
+   public feelingLucky(): void {
+    this.luckyClicked = true;
+    this.searchJokes();
+  }
+
+  /**
    * Change to results page and send data to ResultsComponent
    *
    * @private
@@ -64,7 +75,7 @@ export class HomeComponent implements OnDestroy {
    * @memberof HomeComponent
    */
   private navigateToResults(result: JokeQueryResult): void {
-    this.router.navigate([`/results`, { query: this.searchQuery}], { state: {data: result}});
+    this.router.navigate([`/results`, { query: this.searchQuery}], { state: {data: result, feelingLucky: this.luckyClicked}});
   }
 
   /**

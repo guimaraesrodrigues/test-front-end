@@ -11,7 +11,8 @@ import { GenericLoadingComponent } from './components/generic-loading/generic-lo
   ],
   imports: [
     CommonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+
   ],
   exports: [
     GenericLoadingComponent,

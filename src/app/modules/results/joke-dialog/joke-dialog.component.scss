@@ -1,0 +1,15 @@
+.joke-dialog {
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__body {
+        margin-bottom: 25px;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
